@@ -72,6 +72,6 @@ public class VeiculoController {
     ){
         logger.info("DELETE -> /veiculos/" + id);
         this.veiculoService.delete(id);
-        return  ResponseEntity.status(204).build();
+        return  ResponseEntity.ok().build();
     }
 }
