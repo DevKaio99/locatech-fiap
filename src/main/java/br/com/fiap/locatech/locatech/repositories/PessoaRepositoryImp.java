@@ -18,7 +18,7 @@ public class PessoaRepositoryImp implements PessoaRepository {
     @Override
     public Optional<Pessoa> findById(Long id) {
         return this.jdbcClient
-                .sql("SELECT * FROM pessoa WHERE id = :id")
+                .sql("SELECT * FROM pessoas WHERE id = :id")
                 .param("id", id)
                 .query(Pessoa.class)
                 .optional();
@@ -27,7 +27,7 @@ public class PessoaRepositoryImp implements PessoaRepository {
     @Override
     public List<Pessoa> findAll(int size, int offset) {
         return this.jdbcClient
-                .sql("SELECT * FROM pessoa LIMIT :size OFFSET :offset")
+                .sql("SELECT * FROM pessoas LIMIT :size OFFSET :offset")
                 .param("size", size)
                 .param("offset", offset)
                 .query(Pessoa.class)
@@ -37,7 +37,7 @@ public class PessoaRepositoryImp implements PessoaRepository {
     @Override
     public Integer save(Pessoa pessoa) {
         return this.jdbcClient
-                .sql("INSERT INTO pessoa (nome, cpf, telefone, email) VALUES (:nome, :cpf, :telefone, :email)")
+                .sql("INSERT INTO pessoas (nome, cpf, telefone, email) VALUES (:nome, :cpf, :telefone, :email)")
                 .param("nome", pessoa.getNome())
                 .param("cpf", pessoa.getCpf())
                 .param("telefone", pessoa.getTelefone())
@@ -61,7 +61,7 @@ public class PessoaRepositoryImp implements PessoaRepository {
     @Override
     public Integer delete(Long id) {
         return this.jdbcClient
-                .sql("DELETE FROM pessoa WHERE id = :id")
+                .sql("DELETE FROM pessoas WHERE id = :id")
                 .param("id", id)
                 .update();
     }
