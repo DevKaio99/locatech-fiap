@@ -34,4 +34,4 @@ INSERT INTO pessoas (nome, cpf, telefone, email) VALUES
 ('Almofadinhas', '19942038722', '1199999999', 'mofinha@fiap.com.br');
 
 INSERT INTO alugueis (pessoa_id, veiculo_id, data_inicio, data_fim, valor_total) VALUES
-('1', '1', '2026-04-1', '2026-10-15', '1500.00');
+('1', '1', '2026-04-1', '2026-04-15', '1500.00');

@@ -51,7 +51,7 @@ public class AluguelRepositoryImp implements AluguelRepository {
                 .sql("INSERT INTO alugueis (pessoa_id, veiculo_id, data_inicio, data_fim, valor_total) VALUES (:pessoa_id, :veiculo_id, :data_inicio, :data_fim, :valor_total)")
                 .param("pessoa_id", aluguel.getPessoaId())
                 .param("veiculo_id", aluguel.getVeiculoId())
-                .param("data_inicio", aluguel.getDataInico())
+                .param("data_inicio", aluguel.getDataInicio())
                 .param("data_fim" , aluguel.getDataFim())
                 .param("valor_total" , aluguel.getValorTotal())
                 .update();
@@ -65,7 +65,7 @@ public class AluguelRepositoryImp implements AluguelRepository {
                 .param("id", id)
                 .param("pessoa_id", aluguel.getPessoaId())
                 .param("veiculo_id", aluguel.getVeiculoId())
-                .param("data_inicio", aluguel.getDataInico())
+                .param("data_inicio", aluguel.getDataInicio())
                 .param("data_fim" , aluguel.getDataFim())
                 .param("valor_total" , aluguel.getValorTotal())
                 .update();
