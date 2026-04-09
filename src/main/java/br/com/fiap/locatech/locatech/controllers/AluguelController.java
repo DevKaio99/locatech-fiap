@@ -38,7 +38,7 @@ public class AluguelController {
 
     // http://localhost:8080/alugueis/1
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Aluguel>> findAluguel(
+    public ResponseEntity<Aluguel> findAluguel(
             @PathVariable("id") Long id
     ){
         logger.info("/alugueis/" + id);

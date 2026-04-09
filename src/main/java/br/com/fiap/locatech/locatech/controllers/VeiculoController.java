@@ -39,13 +39,14 @@ public class VeiculoController {
 
     // http://localhost:8080/veiculos/1
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Veiculo>> findVeiculo(
+    public ResponseEntity<Veiculo> findVeiculo(
             @PathVariable("id") Long id
     ){
         logger.info("/veiculos/" + id);
         var veiculo = this.veiculoService.findVeiculoById(id);
         return ResponseEntity.ok(veiculo);
-    }
+        }
+
 
     @PostMapping
     public ResponseEntity<Void> saveVeiculo(

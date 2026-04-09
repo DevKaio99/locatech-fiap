@@ -38,7 +38,7 @@ public class PessoaController {
 
     // http://localhost:8080/pessoas/1
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Pessoa>> findPessoa(
+    public ResponseEntity<Pessoa> findPessoa(
             @PathVariable("id") Long id
     ){
         logger.info("/pessoas/" + id);

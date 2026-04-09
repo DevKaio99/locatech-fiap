@@ -27,8 +27,9 @@ public class AluguelService {
         return this.aluguelRepository.findAll(size, offset);
     }
 
-    public Optional<Aluguel> findAluguelById(long id) {
-        return Optional.ofNullable(this.aluguelRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aluguel não encontrado")));
+    public Aluguel findAluguelById(long id) {
+        return aluguelRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Aluguel não encontrado"));
     }
 
     public void saveAluguel(AluguelRequestDTO aluguel) {
@@ -40,20 +41,20 @@ public class AluguelService {
     public void updateAluguel(Aluguel aluguel, Long id) {
         var update = this.aluguelRepository.update(aluguel, id);
         if (update == 0 ) {
-            throw new RuntimeException("Aluguel não encontrado");
+            throw new ResourceNotFoundException("Aluguel não encontrado");
         }
     }
 
     public void delete(Long id) {
         var delete = this.aluguelRepository.delete(id);
         if (delete == 0 ) {
-            throw new RuntimeException("Aluguel não encontrada");
+            throw new ResourceNotFoundException("Aluguel não encontrada");
         }
     }
 
     private Aluguel calculaAluguel(AluguelRequestDTO aluguelRequestDTO) {
         var veiculo = this.veiculoRepository.findById(aluguelRequestDTO.veiculoId())
-                .orElseThrow(() -> new RuntimeException(("Veiculo não encontrado.")));
+                .orElseThrow(() -> new ResourceNotFoundException(("Veiculo não encontrado.")));
 
         var quantidadeDias = BigDecimal.valueOf(aluguelRequestDTO.dataFim().getDayOfYear() - aluguelRequestDTO.dataInicio().getDayOfYear());
         var valor = veiculo.getValorDiaria().multiply(quantidadeDias);
