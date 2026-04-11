@@ -1,7 +1,9 @@
 package br.com.fiap.locatech.locatech.controllers.handlers;
 
+import br.com.fiap.locatech.locatech.dtos.ErrorResponseDTO;
 import br.com.fiap.locatech.locatech.dtos.ResourceNotFoundDTO;
 import br.com.fiap.locatech.locatech.dtos.ValidationErrorDTO;
+import br.com.fiap.locatech.locatech.services.exceptions.BusinessException;
 import br.com.fiap.locatech.locatech.services.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +32,18 @@ public class ControllerExceptionHandler {
         }
         return ResponseEntity.status(status.value()).body (new ValidationErrorDTO(errors,status.value()));
     }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponseDTO> handleBusinessException(BusinessException e) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ErrorResponseDTO(
+                        e.getMessage(),
+                        status.value()
+                ));
+    }
 }
+

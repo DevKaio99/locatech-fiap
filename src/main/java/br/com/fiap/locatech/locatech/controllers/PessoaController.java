@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -48,7 +47,7 @@ public class PessoaController {
 
     @PostMapping
     public ResponseEntity<Void> savePessoa(
-         @RequestBody Pessoa pessoa
+         @Valid @RequestBody Pessoa pessoa
     ){
         logger.info("POST -> /pessoas");
         this.pessoaService.savePessoa(pessoa);

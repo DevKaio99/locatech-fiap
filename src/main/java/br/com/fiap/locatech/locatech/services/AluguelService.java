@@ -4,13 +4,13 @@ import br.com.fiap.locatech.locatech.dtos.AluguelRequestDTO;
 import br.com.fiap.locatech.locatech.entities.Aluguel;
 import br.com.fiap.locatech.locatech.repositories.AluguelRepository;
 import br.com.fiap.locatech.locatech.repositories.VeiculoRepository;
+import br.com.fiap.locatech.locatech.services.exceptions.BusinessException;
 import br.com.fiap.locatech.locatech.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AluguelService {
@@ -33,6 +33,10 @@ public class AluguelService {
     }
 
     public void saveAluguel(AluguelRequestDTO aluguel) {
+
+        if (aluguel.dataInicio().isAfter(aluguel.dataFim())) {
+            throw new BusinessException("Data início não pode ser maior que data fim");
+        }
         var aluguelEntity = calculaAluguel(aluguel);
         var save = this.aluguelRepository.save(aluguelEntity);
         Assert.state(save == 1, "Erro ao salvar aluguel " + aluguel.pessoaId());
